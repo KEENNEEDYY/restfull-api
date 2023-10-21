@@ -2,13 +2,29 @@ package org.desenvolvedorkennedy.domain.model;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity(name = "tb_account")
 public class Account {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String number;
     private String agency;
-    private BigDecimal limit;
 
+    @Column(precision = 2, scale = 13)
+    private BigDecimal balance;
+    
+    @Column(name = "additional_limit",precision = 2, scale = 13)
+    private BigDecimal limit;
+    
     public Long getId() {
         return this.id;
     }
@@ -28,7 +44,7 @@ public class Account {
     public String getAgency() {
         return this.agency;
     }
-
+    
     public void setAgency(String agency) {
         this.agency = agency;
     }
@@ -39,5 +55,12 @@ public class Account {
 
     public void setLimit(BigDecimal limit) {
         this.limit = limit;
+    }
+    public BigDecimal getBalance() {
+        return this.balance;
+    }
+    
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }
